@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://kit.fontawesome.com/ffe6ffcd92.js" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>weather app</title>
+    <link rel="stylesheet" href="{% static 'css/weather1.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="app"><h1 class="anton-sc-regular" style="margin-top:50px;">weather app</h1>
+</div>
+
+<div class="search">
+      <form method="post">
+        {% csrf_token %}
+        <input placeholder="Search..." type="text" name="city" style="width:500px; margin-left:500px; margin-top:20px;">
+        <button type="submit" style="margin-top:20px;">Go</button>
+      </form>
+</div>
+{% if temp and city_name and country_code and humidity and wind_speed and description %}
+<div id="weather_wrapper">
+	<div class="weatherCard">
+		<div class="currentTemp">
+			<span class="temp" style="font-size:30px;">{{temp}}</span>
+			<span class="temp" style="font-size:30px;">{{description}}</span>
+			<span class="location">{{city_name}} : {{country_code}}</span>
+		</div>
+		<div class="currentWeather">
+			<span class="conditions"><img src="http://openweathermap.org/img/w/{{icon}}.png" alt="icon" style="width:130px;"></span>
+			<div class="info">
+				<span class="rain" style="margin-top:5px; padding-top:8px;color:black;">{{humidity}}</span>
+				<span class="wind" style="margin-top:5px; padding-top:8px;color:black;"><i class="fa-solid fa-wind"></i>{{wind_speed}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+</body>
+</html>
